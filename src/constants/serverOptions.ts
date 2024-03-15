@@ -22,4 +22,5 @@ export const defaultPrompt = {
   width: 512,
   height: 512,
   image_count: 1,
+  checkpoint: "darkjunglemix_V2InkFix.safetensors"
 };

@@ -1,7 +1,7 @@
 {
   "3": {
     "inputs": {
-      "seed": 375925753401525,
+      "seed": 848940917658793,
       "steps": 20,
       "cfg": 8,
       "sampler_name": "euler",
@@ -42,7 +42,7 @@
   },
   "6": {
     "inputs": {
-      "text": "1girl, blonde hair, green eyes, fox ears, fox tail, chibi, miko",
+      "text": "1girl, blue hair, green eyes, short hair, casual",
       "clip": [
         "4",
         1
@@ -52,7 +52,7 @@
   },
   "7": {
     "inputs": {
-      "text": "text, watermark",
+      "text": "nsfw, nude",
       "clip": [
         "4",
         1
@@ -75,7 +75,7 @@
   },
   "9": {
     "inputs": {
-      "filename_prefix": "foxgirl",
+      "filename_prefix": "ComfyUI",
       "images": [
         "8",
         0

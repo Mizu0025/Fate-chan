@@ -6,6 +6,7 @@ export interface imagePrompt {
   width: number;
   height: number;
   image_count: number;
+  checkpoint: string;
 }
 
 export function parseTriggerMessage(message: string): imagePrompt {
@@ -19,6 +20,7 @@ export function parseTriggerMessage(message: string): imagePrompt {
   let width = defaultPrompt.width;
   let height = defaultPrompt.height;
   let imageCount = defaultPrompt.image_count;
+  let checkpoint = defaultPrompt.checkpoint;
 
   // Parse the remaining parts, which contain the options
   for (const part of parts) {
@@ -29,7 +31,9 @@ export function parseTriggerMessage(message: string): imagePrompt {
     } else if (part.startsWith('height=')) {
       height = parseInt(part.slice(7).trim(), 10);
     } else if (part.startsWith('count=')) {
-      imageCount = parseInt(part.slice(6).trim(), 10);
+      imageCount = parseInt(part.slice(6).trim(), 10);    
+    } else if (part.startsWith('model=')) {
+      checkpoint = part.slice(6).trim();
     }
   }
 
@@ -39,5 +43,6 @@ export function parseTriggerMessage(message: string): imagePrompt {
     height: height,
     width: width,
     image_count: imageCount,
+    checkpoint: checkpoint
   };
 }
