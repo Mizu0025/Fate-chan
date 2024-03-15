@@ -1,0 +1,33 @@
+{
+  "name": "fate-chan",
+  "version": "1.0.0",
+  "description": "IRC bot which generates art via Stable Diffusion API calls",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mizu0025/Fate-chan.git"
+  },
+  "keywords": [
+    "irc",
+    "stable diffusion",
+    "art"
+  ],
+  "author": "Mizu0025",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mizu0025/Fate-chan/issues"
+  },
+  "homepage": "https://github.com/Mizu0025/Fate-chan#readme",
+  "devDependencies": {
+    "@types/irc": "^0.5.4",
+    "@typescript-eslint/parser": "^7.2.0",
+    "eslint": "^8.57.0",
+    "irc": "^0.5.2",
+    "prettier": "^3.2.5",
+    "prettier-eslint": "^16.3.0",
+    "typescript": "^5.4.2"
+  }
+}
