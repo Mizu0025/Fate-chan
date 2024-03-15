@@ -1,5 +1,5 @@
 import irc from 'irc';
-import { serverOptions } from './helpers/serverOptions';
+import { serverOptions } from './constants/serverOptions';
 import { registerListeners } from './listeners';
 
 // Create a new IRC client

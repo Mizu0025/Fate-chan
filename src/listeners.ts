@@ -1,6 +1,7 @@
 import irc from 'irc';
-import { triggerWord } from './helpers/serverOptions';
+import { triggerWord } from './constants/serverOptions';
 import { parseTriggerMessage } from './helpers/parsePrompt';
+import { requestImageGeneration } from './helpers/requestImageGen';
 
 export function registerListeners(client: irc.Client) {
   // Event listener for successful connection
@@ -9,17 +10,17 @@ export function registerListeners(client: irc.Client) {
   });
 
   // Event listener for messages in channels
-  client.addListener('message', (from, to, message) => {
+  client.addListener('message', async (from, to, message) => {
     console.log(`Message from ${from} to ${to}: ${message}`);
 
     if (message.toLowerCase().includes(triggerWord)) {
       // Respond in the same channel
       const parsedPrompt = parseTriggerMessage(message);
+      const imagesUrlPaths = await requestImageGeneration(parsedPrompt);
 
-      client.say(
-        to,
-        `Pos: ${parsedPrompt.positive_prompt}, Neg: ${parsedPrompt.negative_prompt}, Width: ${parsedPrompt.width}, Height: ${parsedPrompt.height}, ImgCount: ${parsedPrompt.image_count}`,
-      );
+      imagesUrlPaths.forEach((imageUrlPath: String) => {
+        client.say(to, `${imageUrlPath}`);
+      });
     }
   });
 

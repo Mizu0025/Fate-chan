@@ -1,6 +1,6 @@
-import { triggerWord, defaultPrompt } from './serverOptions';
+import { triggerWord, defaultPrompt } from '../constants/serverOptions';
 
-interface imagePrompt {
+export interface imagePrompt {
   positive_prompt: string;
   negative_prompt: string;
   width: number;

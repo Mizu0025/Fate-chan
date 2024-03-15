@@ -1,5 +1,5 @@
-import { parseTriggerMessage } from './parsePrompt';
-import { defaultPrompt } from './serverOptions';
+import { parseTriggerMessage } from '../helpers/parsePrompt';
+import { defaultPrompt } from '../constants/serverOptions';
 
 describe('parseTriggerMessage', () => {
   test('parses message with all options', () => {
