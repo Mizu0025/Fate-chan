@@ -4,6 +4,8 @@
   "description": "IRC bot which generates art via Stable Diffusion API calls",
   "main": "index.js",
   "scripts": {
+    "start": "npm run compile && node dist/main.js",
+    "compile": "tsc",
     "test": "jest test"
   },
   "repository": {
