@@ -9,28 +9,24 @@ function isImageFile(filename: string) {
 }
 
 // Function to scan a directory for image files
-function scanDirectory(directory: string) {
+export function scanDirectory(directory: string): string[] {
   return fs.readdirSync(directory).filter((file: string) => isImageFile(file));
 }
 
-// Store initial state of the directory
-const initialFiles = scanDirectory(comfyOutputDirectory);
-
 // Function to check for new files
-export function checkForNewFiles(imageCount: number): string[] {
-  let requestedImages: string[] = [];
+export function checkForNewFiles(initialImageFolder: string[], imageCount: number): string[] {
+  let newFiles: string[] = [];
 
-  const interval = setInterval(() => {
+  while (newFiles.length < imageCount) {
     const currentFiles = scanDirectory(comfyOutputDirectory);
-    const newFiles = currentFiles.filter((file: string) => !initialFiles.includes(file));
-    if (newFiles.length >= imageCount) {
-      console.log('All new files generated');
-      clearInterval(interval);
-      newFiles.forEach((file) => {
-        requestedImages.push(file);
-      });
-    }
-  }, 1000);
+    newFiles = currentFiles.filter((file) => !initialImageFolder.includes(file));
 
-  return requestedImages;
+    // wait 1 second
+    new Promise((resolve) => setTimeout(resolve, 1000));
+  }
+
+  console.log('All new files generated');
+  console.log('newImagePaths', newFiles);
+
+  return newFiles;
 }

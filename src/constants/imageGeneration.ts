@@ -1,3 +1,3 @@
-export const comfyUrl = 'http://192.168.50.8:8188/prompt';
-export const comfyOutputDirectory = '/home/liam/Stable-Diffusion/ComfyUI/output';
+export const comfyUrl = 'http://localhost:8188';
+export const comfyOutputDirectory = '/artbot';
 export const domainPath = 'https://magical-hayate.net/comfyui/';

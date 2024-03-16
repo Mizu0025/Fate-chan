@@ -18,6 +18,7 @@ export const serverOptions: serverConfig = {
 export const triggerWord: string = '!fate';
 
 export const defaultPrompt = {
+  positive_prompt: "1girl, red hair, green eyes, hoodie, jeans, city streets, raining, night",
   negative_prompt: 'nsfw, nude',
   width: 512,
   height: 512,
