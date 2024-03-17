@@ -1,7 +1,5 @@
 import irc from 'irc';
-import { triggerWord } from './constants/serverOptions';
-import { parseImagePrompt } from './helpers/parsePrompt';
-import { requestImageGeneration } from './helpers/requestImageGen';
+import { handleTriggerMessage } from './helpers/handleTriggerMessages';
 
 export function registerListeners(client: irc.Client) {
   // Event listener for successful connection
@@ -10,27 +8,14 @@ export function registerListeners(client: irc.Client) {
   });
 
   // Event listener for messages in channels
-  client.addListener('message', async (from, to, message) => {
+  client.addListener('message', async (from: string, to: string, message: string) => {
     console.log(`Message from ${from} to ${to}: ${message}`);
 
-    if (message.toLowerCase().includes(triggerWord)) {
-      // Respond in the same channel
-      try {
-        const parsedPrompt = parseImagePrompt(message);
-        const imagesUrlPaths = await requestImageGeneration(parsedPrompt);
-
-        imagesUrlPaths.forEach((imageUrlPath: String) => {
-          client.say(to, `${from}: ${imageUrlPath}`);
-        });
-      } catch (error) {
-        console.log(error);
-        client.say(to, `${error}`);
-      }
-    }
+    await handleTriggerMessage(client, from, to, message);
   });
 
   // Event listener for joining channels
-  client.addListener('join', (channel, nick, message) => {
+  client.addListener('join', (channel: string, nick: string, message: string) => {
     console.log(`${nick} joined ${channel}`);
   });
 }
