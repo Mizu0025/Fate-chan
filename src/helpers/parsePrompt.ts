@@ -1,4 +1,6 @@
 import { triggerWord, defaultPrompt } from '../constants/serverOptions';
+import { MissingModelError } from '../errors/missingModelError';
+import { doesModelExist } from './getComfyModels';
 
 export interface imagePrompt {
   positive_prompt: string;
@@ -9,7 +11,7 @@ export interface imagePrompt {
   checkpoint: string;
 }
 
-export function parseTriggerMessage(message: string): imagePrompt {
+export function parseImagePrompt(message: string): imagePrompt {
   const promptRequest = message.replace(triggerWord, '');
 
   const parts = promptRequest.split('--').map((part) => part.trim());
@@ -31,9 +33,16 @@ export function parseTriggerMessage(message: string): imagePrompt {
     } else if (part.startsWith('height=')) {
       height = parseInt(part.slice(7).trim(), 10);
     } else if (part.startsWith('count=')) {
-      imageCount = parseInt(part.slice(6).trim(), 10);    
+      imageCount = parseInt(part.slice(6).trim(), 10);
     } else if (part.startsWith('model=')) {
-      checkpoint = part.slice(6).trim();
+      const requestedCheckpoint = part.slice(6).trim();
+
+      const existingModel = doesModelExist(requestedCheckpoint);
+      if (existingModel) {
+        checkpoint = requestedCheckpoint + '.safetensors';
+      } else {
+        throw new MissingModelError('No existing model in database!');
+      }
     }
   }
 
@@ -43,6 +52,6 @@ export function parseTriggerMessage(message: string): imagePrompt {
     height: height,
     width: width,
     image_count: imageCount,
-    checkpoint: checkpoint
+    checkpoint: checkpoint,
   };
 }
