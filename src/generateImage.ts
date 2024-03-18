@@ -4,6 +4,7 @@ import axios from 'axios';
 import fs from 'fs';
 import { randomInt } from 'crypto';
 import { JSONStructure, RequestObject } from './constants/comfyuiRequest';
+import { ImageGenerationError } from './errors/imageGenerationError';
 
 async function queue_prompt(prompt_workflow: RequestObject) {
   const prompt: JSONStructure = { prompt: prompt_workflow };
@@ -15,13 +16,13 @@ async function queue_prompt(prompt_workflow: RequestObject) {
         'Content-Type': 'application/json',
       },
     })
-    .then((response) => {
-      console.log('Response:', response.data);
-    })
     .catch((error) => {
-      console.error('Error:', error);
+      console.log(`ImageGen: ${error}`);
+      throw new ImageGenerationError('Failed to generate image!');
     });
 }
+
+export let currently_loaded_model: string;
 
 export async function generate_txt2img(parsedPrompt: imagePrompt) {
   // load json workflow
@@ -29,7 +30,10 @@ export async function generate_txt2img(parsedPrompt: imagePrompt) {
   const prompt_workflow: RequestObject = JSON.parse(workflowData);
 
   // load checkpoint
-  prompt_workflow[4].inputs.ckpt_name = parsedPrompt.checkpoint;
+  if (!currently_loaded_model || currently_loaded_model !== parsedPrompt.checkpoint) {
+    currently_loaded_model = parsedPrompt.checkpoint;
+  }
+  prompt_workflow[4].inputs.ckpt_name = currently_loaded_model;
 
   // set image dimensions and batch size
   prompt_workflow[5].inputs.width = parsedPrompt.width;

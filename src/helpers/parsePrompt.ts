@@ -1,5 +1,6 @@
 import { triggerWord, defaultPrompt } from '../constants/serverOptions';
 import { MissingModelError } from '../errors/missingModelError';
+import { currently_loaded_model } from '../generateImage';
 import { doesModelExist } from './getComfyModels';
 
 export interface imagePrompt {
@@ -22,7 +23,7 @@ export function parseImagePrompt(message: string): imagePrompt {
   let width = defaultPrompt.width;
   let height = defaultPrompt.height;
   let imageCount = defaultPrompt.image_count;
-  let checkpoint = defaultPrompt.checkpoint;
+  let checkpoint = currently_loaded_model ? currently_loaded_model : defaultPrompt.checkpoint;
 
   // Parse the remaining parts, which contain the options
   for (const part of parts) {
@@ -35,15 +36,20 @@ export function parseImagePrompt(message: string): imagePrompt {
     } else if (part.startsWith('count=')) {
       imageCount = parseInt(part.slice(6).trim(), 10);
     } else if (part.startsWith('model=')) {
-      const requestedCheckpoint = part.slice(6).trim();
+      const requestedCheckpoint = part.slice(6).trim() + '.safetensors';
 
       const existingModel = doesModelExist(requestedCheckpoint);
       if (existingModel) {
-        checkpoint = requestedCheckpoint + '.safetensors';
+        checkpoint = requestedCheckpoint;
       } else {
         throw new MissingModelError('No existing model in database!');
       }
     }
+  }
+
+  if (checkpoint.toLowerCase().includes('xl')) {
+    height = height < 1024 ? 1024 : height;
+    width = width < 1024 ? 1024 : width;
   }
 
   return {
