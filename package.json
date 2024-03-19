@@ -4,7 +4,9 @@
   "description": "IRC bot which generates art via Stable Diffusion API calls",
   "main": "index.js",
   "scripts": {
-    "start": "npm run compile && node dist/main.js",
+    "start": "node dist/main.js",
+    "start-test": "cross-env NODE_ENV=development npm run compile && npm run start",
+    "start-live": "cross-env NODE_ENV=live npm run compile && npm run start",
     "compile": "tsc",
     "test": "jest test"
   },
@@ -27,13 +29,17 @@
     "@types/irc": "^0.5.4",
     "@types/jest": "^29.5.12",
     "@typescript-eslint/parser": "^7.2.0",
-    "axios": "^1.6.7",
+    "cross-env": "^7.0.3",
     "eslint": "^8.57.0",
-    "irc": "^0.5.2",
     "jest": "^29.7.0",
-    "prettier": "^3.2.5",
     "prettier-eslint": "^16.3.0",
+    "prettier": "^3.2.5",
     "ts-jest": "^29.1.2",
+    "winston": "^3.12.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "irc": "^0.5.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.4.2"
   }

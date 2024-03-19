@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { comfyOutputDirectory } from '../constants/imageGeneration';
+import { winstonLogger } from './logger';
 
 // Function to check if a file has a valid image extension
 function isImageFile(filename: string) {
@@ -25,8 +26,8 @@ export function checkForNewFiles(initialImageFolder: string[], imageCount: numbe
     new Promise((resolve) => setTimeout(resolve, 1000));
   }
 
-  console.log('All new files generated');
-  console.log('newImagePaths', newFiles);
+  winstonLogger.info('All new files generated');
+  winstonLogger.info('newImagePaths', newFiles);
 
   return newFiles;
 }

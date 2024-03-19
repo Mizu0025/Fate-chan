@@ -1,0 +1,51 @@
+[32minfo[39m: Connected to IRC server as FateBot {"timestamp":"2024-03-19T10:37:22.416Z"}
+[32minfo[39m: FateBot joined #nanobot {"timestamp":"2024-03-19T10:37:22.423Z"}
+[32minfo[39m: Connected to IRC server as FateBot {"timestamp":"21:41:55"}
+[32minfo[39m: FateBot joined #nanobot {"timestamp":"21:41:55"}
+[32minfo[39m: Connected to IRC server as FateBot {"timestamp":"21:44:27"}
+[32minfo[39m: FateBot joined #nanobot {"timestamp":"21:44:27"}
+[32minfo[39m: Message from Mizu25 to #nanobot: !fate 1girl, blonde hair, green eyes, cat ears, cat tail, pajamas, lying down, bed, night, sleeping {"timestamp":"21:44:56"}
+[32minfo[39m: Model swapped to darkjunglemix_V2InkFix.safetensors {"timestamp":"21:44:56"}
+[32minfo[39m: axiosData: {"timestamp":"21:44:56"}
+[32minfo[39m: {"prompt_id":"c10555ec-3f4a-4675-a309-6720afc92170","number":8,"node_errors":{}} {"timestamp":"21:44:56"}
+[32minfo[39m: All new files generated {"timestamp":"21:44:59"}
+[32minfo[39m: newImagePaths {"0":"Fatebot_00028_.png","timestamp":"21:44:59"}
+[32minfo[39m: Connected to IRC server as FateBot {"timestamp":"21:46:05"}
+[32minfo[39m: FateBot joined #nanobot {"timestamp":"21:46:05"}
+[32minfo[39m: Message from Mizu25 to #nanobot: !fate 1girl, blue hair, cat ears, cat tail, pajamas, lying down, bed, night, sleeping {"timestamp":"21:46:24"}
+[32minfo[39m: Model swapped to darkjunglemix_V2InkFix.safetensors {"timestamp":"21:46:24"}
+[32minfo[39m: axiosData: {"prompt":{"3":{"inputs":{"seed":515726,"steps":20,"cfg":8,"sampler_name":"euler","scheduler":"normal","denoise":1,"model":["4",0],"positive":["6",0],"negative":["7",0],"latent_image":["5",0]},"class_type":"KSampler"},"4":{"inputs":{"ckpt_name":"darkjunglemix_V2InkFix.safetensors"},"class_type":"CheckpointLoaderSimple"},"5":{"inputs":{"width":512,"height":512,"batch_size":1},"class_type":"EmptyLatentImage"},"6":{"inputs":{"text":"1girl, blue hair, cat ears, cat tail, pajamas, lying down, bed, night, sleeping","clip":["4",1]},"class_type":"CLIPTextEncode"},"7":{"inputs":{"text":"nsfw, nude","clip":["4",1]},"class_type":"CLIPTextEncode"},"8":{"inputs":{"samples":["3",0],"vae":["4",2]},"class_type":"VAEDecode"},"9":{"inputs":{"filename_prefix":"Fatebot","images":["8",0]},"class_type":"SaveImage"}}} {"timestamp":"21:46:24"}
+[32minfo[39m: {"prompt_id":"d6f769e7-4f79-4c05-811e-ec93c0e3a66f","number":9,"node_errors":{}} {"timestamp":"21:46:24"}
+[32minfo[39m: All new files generated {"timestamp":"21:46:27"}
+[32minfo[39m: newImagePaths {"0":"Fatebot_00029_.png","timestamp":"21:46:27"}
+[32minfo[39m: Message from Mizu25 to #nanobot: !fate --getModels {"timestamp":"21:46:50"}
+[32minfo[39m: axiosData: {"prompt":{"3":{"inputs":{"seed":219669,"steps":20,"cfg":8,"sampler_name":"euler","scheduler":"normal","denoise":1,"model":["4",0],"positive":["6",0],"negative":["7",0],"latent_image":["5",0]},"class_type":"KSampler"},"4":{"inputs":{"ckpt_name":"darkjunglemix_V2InkFix.safetensors"},"class_type":"CheckpointLoaderSimple"},"5":{"inputs":{"width":512,"height":512,"batch_size":1},"class_type":"EmptyLatentImage"},"6":{"inputs":{"text":"","clip":["4",1]},"class_type":"CLIPTextEncode"},"7":{"inputs":{"text":"nsfw, nude","clip":["4",1]},"class_type":"CLIPTextEncode"},"8":{"inputs":{"samples":["3",0],"vae":["4",2]},"class_type":"VAEDecode"},"9":{"inputs":{"filename_prefix":"Fatebot","images":["8",0]},"class_type":"SaveImage"}}} {"timestamp":"21:46:50"}
+[32minfo[39m: {"prompt_id":"61801607-3236-4950-b94c-db2a52a79c82","number":10,"node_errors":{}} {"timestamp":"21:46:50"}
+[32minfo[39m: All new files generated {"timestamp":"21:46:53"}
+[32minfo[39m: newImagePaths {"0":"Fatebot_00030_.png","timestamp":"21:46:53"}
+[32minfo[39m: Message from Mizu25 to #nanobot: !fate --help {"timestamp":"21:46:56"}
+[32minfo[39m: Message from Mizu25 to #nanobot: !fate --currentModels {"timestamp":"21:47:02"}
+[32minfo[39m: Message from Mizu25 to #nanobot: !fate 1girl, blue hair, cat ears, cat tail, pajamas, lying down, bed, night, sleeping --model=kohakuXLDelta_rev1 {"timestamp":"21:47:11"}
+[32minfo[39m: Model swapped to kohakuXLDelta_rev1.safetensors {"timestamp":"21:47:11"}
+[32minfo[39m: axiosData: {"prompt":{"3":{"inputs":{"seed":883327,"steps":20,"cfg":8,"sampler_name":"euler","scheduler":"normal","denoise":1,"model":["4",0],"positive":["6",0],"negative":["7",0],"latent_image":["5",0]},"class_type":"KSampler"},"4":{"inputs":{"ckpt_name":"kohakuXLDelta_rev1.safetensors"},"class_type":"CheckpointLoaderSimple"},"5":{"inputs":{"width":1024,"height":1024,"batch_size":1},"class_type":"EmptyLatentImage"},"6":{"inputs":{"text":"1girl, blue hair, cat ears, cat tail, pajamas, lying down, bed, night, sleeping","clip":["4",1]},"class_type":"CLIPTextEncode"},"7":{"inputs":{"text":"nsfw, nude","clip":["4",1]},"class_type":"CLIPTextEncode"},"8":{"inputs":{"samples":["3",0],"vae":["4",2]},"class_type":"VAEDecode"},"9":{"inputs":{"filename_prefix":"Fatebot","images":["8",0]},"class_type":"SaveImage"}}} {"timestamp":"21:47:11"}
+[32minfo[39m: {"prompt_id":"e330b913-61d8-4dbd-b205-9fd4f6ea444c","number":11,"node_errors":{}} {"timestamp":"21:47:11"}
+[32minfo[39m: All new files generated {"timestamp":"21:47:51"}
+[32minfo[39m: newImagePaths {"0":"Fatebot_00031_.png","timestamp":"21:47:51"}
+[32minfo[39m: Connected to IRC server as FateBot {"timestamp":"21:57:38"}
+[32minfo[39m: FateBot joined #nanobot {"timestamp":"21:57:39"}
+[32minfo[39m: Connected to IRC server as FateBot {"timestamp":"22:08:07"}
+[32minfo[39m: FateBot joined #nanobot {"timestamp":"22:08:07"}
+[32minfo[39m: Connected to IRC server as FateBot {"timestamp":"22:09:13"}
+[32minfo[39m: FateBot joined #nanobot {"timestamp":"22:09:13"}
+[32minfo[39m: Connected to IRC server as FateBot {"timestamp":"22:09:40"}
+[32minfo[39m: FateBot joined #nanobot {"timestamp":"22:09:40"}
+[32minfo[39m: Connected to IRC server as FateBot {"timestamp":"22:15:01"}
+[32minfo[39m: FateBot joined #nanobot {"timestamp":"22:15:02"}
+[32minfo[39m: Connected to IRC server as FateBot {"timestamp":"22:17:14"}
+[32minfo[39m: FateBot joined #nanobot {"timestamp":"22:17:14"}
+[32minfo[39m: Connected to IRC server as FateBot {"timestamp":"22:18:20"}
+[32minfo[39m: FateBot joined #nanobot {"timestamp":"22:18:20"}
+[32minfo[39m: Connected to IRC server as FateBot {"timestamp":"22:22:02"}
+[32minfo[39m: FateBot joined #nanobot {"timestamp":"22:22:02"}
+[32minfo[39m: Connected to IRC server as FateBot {"timestamp":"22:22:14"}
+[32minfo[39m: FateBot joined #nanobot {"timestamp":"22:22:14"}

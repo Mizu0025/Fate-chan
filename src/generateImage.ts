@@ -5,10 +5,12 @@ import fs from 'fs';
 import { randomInt } from 'crypto';
 import { JSONStructure, RequestObject } from './constants/comfyuiRequest';
 import { ImageGenerationError } from './errors/imageGenerationError';
+import { winstonLogger } from './helpers/logger';
 
 async function queue_prompt(prompt_workflow: RequestObject) {
   const prompt: JSONStructure = { prompt: prompt_workflow };
   const data: string = JSON.stringify(prompt);
+  winstonLogger.info(`axiosData: ${data}`);
 
   await axios
     .post(`${comfyUrl}/prompt`, data, {
@@ -16,8 +18,11 @@ async function queue_prompt(prompt_workflow: RequestObject) {
         'Content-Type': 'application/json',
       },
     })
-    .catch((error) => {
-      console.log(`ImageGen: ${error}`);
+    .then((response: any) => {
+      winstonLogger.info(JSON.stringify(response.data));
+    })
+    .catch((error: any) => {
+      winstonLogger.error(error);
       throw new ImageGenerationError('Failed to generate image!');
     });
 }

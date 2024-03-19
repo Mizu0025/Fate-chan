@@ -4,11 +4,13 @@ import { parseImagePrompt } from './parsePrompt';
 import { requestImageGeneration } from './requestImageGen';
 import { currently_loaded_model } from '../generateImage';
 import { getCurrentModels } from './getComfyModels';
+import { winstonLogger } from './logger';
 
 async function generateImageRequest(client: irc.Client, from: string, to: string, message: string) {
   try {
     const parsedPrompt = parseImagePrompt(message);
     if (parsedPrompt.checkpoint != currently_loaded_model) {
+      winstonLogger.info(`Model swapped to ${parsedPrompt.checkpoint}`);
       client.say(to, `The model is now ${parsedPrompt.checkpoint}`);
     }
 
@@ -17,8 +19,8 @@ async function generateImageRequest(client: irc.Client, from: string, to: string
     imagesUrlPaths.forEach((imageUrlPath: String) => {
       client.say(to, `${from}: ${imageUrlPath}`);
     });
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    winstonLogger.error(error);
     client.say(to, `${error}`);
   }
 }
