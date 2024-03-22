@@ -7,6 +7,24 @@ jest.mock('../helpers/getComfyModels', () => {
     doesModelExist: jest.fn(),
   };
 });
+jest.mock('winston', () => ({
+  createLogger: jest.fn(() => ({
+    log: jest.fn(),
+    info: jest.fn(),
+    error: jest.fn(),
+  })),
+  format: {
+    combine: jest.fn(),
+    timestamp: jest.fn(),
+    printf: jest.fn(),
+    colorize: jest.fn(),
+    simple: jest.fn(),
+  },
+  transports: {
+    Console: jest.fn(),
+    File: jest.fn(),
+  },
+}));
 
 describe('parseImagePrompt', () => {
   type TestCase = [
@@ -21,8 +39,8 @@ describe('parseImagePrompt', () => {
       'parses message with only positive prompt',
       '!fate 1girl, blue hair',
       {
-        positive_prompt: '1girl, blue hair',
-        negative_prompt: defaultPrompt.negative_prompt,
+        positive_prompt: `${defaultPrompt.positive_prompt}, 1girl, blue hair`,
+        negative_prompt: `${defaultPrompt.negative_prompt}`,
         height: defaultPrompt.height,
         width: defaultPrompt.width,
         image_count: defaultPrompt.image_count,
@@ -34,8 +52,8 @@ describe('parseImagePrompt', () => {
       'parses message with custom negative prompt',
       '!fate 1girl, blue hair --no=banana',
       {
-        positive_prompt: '1girl, blue hair',
-        negative_prompt: 'banana',
+        positive_prompt: `${defaultPrompt.positive_prompt}, 1girl, blue hair`,
+        negative_prompt: `${defaultPrompt.negative_prompt}, banana`,
         height: defaultPrompt.height,
         width: defaultPrompt.width,
         image_count: defaultPrompt.image_count,
@@ -47,8 +65,8 @@ describe('parseImagePrompt', () => {
       'parses message with custom height',
       '!fate 1girl, blue hair --height=123',
       {
-        positive_prompt: '1girl, blue hair',
-        negative_prompt: defaultPrompt.negative_prompt,
+        positive_prompt: `${defaultPrompt.positive_prompt}, 1girl, blue hair`,
+        negative_prompt: `${defaultPrompt.negative_prompt}`,
         height: 123,
         width: defaultPrompt.width,
         image_count: defaultPrompt.image_count,
@@ -60,8 +78,8 @@ describe('parseImagePrompt', () => {
       'parses message with custom width',
       '!fate 1girl, blue hair --width=456',
       {
-        positive_prompt: '1girl, blue hair',
-        negative_prompt: defaultPrompt.negative_prompt,
+        positive_prompt: `${defaultPrompt.positive_prompt}, 1girl, blue hair`,
+        negative_prompt: `${defaultPrompt.negative_prompt}`,
         height: defaultPrompt.height,
         width: 456,
         image_count: defaultPrompt.image_count,
@@ -73,8 +91,8 @@ describe('parseImagePrompt', () => {
       'parses message with custom image count',
       '!fate 1girl, blue hair --count=2',
       {
-        positive_prompt: '1girl, blue hair',
-        negative_prompt: defaultPrompt.negative_prompt,
+        positive_prompt: `${defaultPrompt.positive_prompt}, 1girl, blue hair`,
+        negative_prompt: `${defaultPrompt.negative_prompt}`,
         height: defaultPrompt.height,
         width: defaultPrompt.width,
         image_count: 2,
@@ -86,8 +104,8 @@ describe('parseImagePrompt', () => {
       'parses message with existing checkpoint',
       '!fate 1girl, blue hair --model=applesMix',
       {
-        positive_prompt: '1girl, blue hair',
-        negative_prompt: defaultPrompt.negative_prompt,
+        positive_prompt: `${defaultPrompt.positive_prompt}, 1girl, blue hair`,
+        negative_prompt: `${defaultPrompt.negative_prompt}`,
         height: defaultPrompt.height,
         width: defaultPrompt.width,
         image_count: defaultPrompt.image_count,
@@ -99,8 +117,8 @@ describe('parseImagePrompt', () => {
       'parses message with nonexistent checkpoint',
       '!fate 1girl, blue hair --model=orangesMix',
       {
-        positive_prompt: '1girl, blue hair',
-        negative_prompt: defaultPrompt.negative_prompt,
+        positive_prompt: `${defaultPrompt.positive_prompt}, 1girl, blue hair`,
+        negative_prompt: `${defaultPrompt.negative_prompt}`,
         height: defaultPrompt.height,
         width: defaultPrompt.width,
         image_count: defaultPrompt.image_count,
