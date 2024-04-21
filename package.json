@@ -5,12 +5,10 @@
   "bin": {
     "fate-chan": "src/main.ts"
   },
-  "main": "index.ts",
+  "main": "src/main.ts",
   "scripts": {
-    "start": "ts-node src/main.ts",
     "start-test": "ENVIRONMENT=test ts-node src/main.ts",
     "start-live": "ENVIRONMENT=live ts-node src/main.ts",
-    "compile": "tsc",
     "test": "jest test"
   },
   "repository": {
