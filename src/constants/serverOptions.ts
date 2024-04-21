@@ -8,7 +8,7 @@ interface serverConfig {
 
 const testServer: string = '192.168.50.5';
 const liveServer: string = 'irc.rizon.net';
-const isLiveEnvironment: boolean = process.env.NODE_ENV === 'live';
+const isLiveEnvironment: boolean = process.env.ENVIRONMENT === 'live';
 
 // Define IRC server configuration
 export const serverOptions: serverConfig = {
