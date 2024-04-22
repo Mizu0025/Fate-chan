@@ -1,7 +1,7 @@
 import { checkForNewFiles, scanDirectory } from './getNewImages';
-import { getUrlPath } from './getUrlPath';
+import { getMultipleUrlPaths } from './getUrlPath';
 import { imagePrompt } from './parsePrompt';
-import { generate_txt2img } from '../generateImage';
+import { generate_txt2img, queue_sd3_prompt } from '../generateImage';
 import { comfyOutputDirectory } from '../constants/imageGeneration';
 
 export async function requestImageGeneration(parsedPrompt: imagePrompt): Promise<String[]> {
@@ -15,8 +15,16 @@ export async function requestImageGeneration(parsedPrompt: imagePrompt): Promise
   const newImagesInFolder = checkForNewFiles(initialImageFolder, parsedPrompt.image_count);
 
   // refactor imageFolder path into domain url, add to imagesList
-  const newImagesUrlPath = getUrlPath(newImagesInFolder);
+  const newImagesUrlPath = getMultipleUrlPaths(newImagesInFolder);
 
   // return imagesList
   return newImagesUrlPath;
+}
+
+export async function requestSD3ImageGeneration(parsedPrompt: imagePrompt): Promise<string> {
+  // request new image from ComfyUI API
+  const sd3Image = await queue_sd3_prompt(parsedPrompt);
+
+  // return imagesList
+  return sd3Image;
 }
