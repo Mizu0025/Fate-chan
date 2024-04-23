@@ -45,7 +45,7 @@ export async function queue_sd3_prompt(parsedPrompt: imagePrompt): Promise<strin
       validateStatus: undefined,
       responseType: 'arraybuffer',
       headers: {
-        Authorization: `Bearer sk-OpZfTuK2W2gRZ9iyH7QIlFefQZ9aUkeCmSGvuNCqYg78MoEb`,
+        Authorization: `Bearer token here`,
         Accept: 'image/*',
       },
     },
