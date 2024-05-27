@@ -1,4 +1,6 @@
-export const comfyUrl = 'http://localhost:8188';
-export const comfyOutputDirectory = '/artbot';
-export const comfyModelsFolder = '/home/liam/Stable-Diffusion/Models/checkpoints';
+const baseDir = "/home/mizu/ai";
+
+export const comfyUrl = 'http://192.168.50.8:8188';
+export const comfyOutputDir = `${baseDir}/art`;
+export const comfyCheckpointsDir = `${baseDir}/models/checkpoints`;
 export const domainPath = 'https://magical-hayate.net/comfyui/';

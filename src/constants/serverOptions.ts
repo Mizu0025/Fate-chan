@@ -1,3 +1,5 @@
+import { getCurrentModels } from "../helpers/getComfyModels";
+
 interface serverConfig {
   channels: string[];
   server: string;
@@ -27,5 +29,6 @@ export const defaultPrompt = {
   width: 1024,
   height: 1024,
   image_count: 1,
-  checkpoint: 'animagineXLV3_v30.safetensors',
+  checkpoint: 'deepBlueXL_v401.safetensors'
+//  checkpoint: getCurrentModels().filter(model => model.includes("xl"))[0],
 };

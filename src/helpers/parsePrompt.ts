@@ -23,7 +23,9 @@ export function parseImagePrompt(message: string): imagePrompt {
   let width = defaultPrompt.width;
   let height = defaultPrompt.height;
   let imageCount = defaultPrompt.image_count;
-  let checkpoint = currently_loaded_model ? currently_loaded_model : defaultPrompt.checkpoint;
+  let checkpoint = currently_loaded_model 
+  ? currently_loaded_model 
+  : defaultPrompt.checkpoint;
 
   // Parse the remaining parts, which contain the options
   for (const part of parts) {

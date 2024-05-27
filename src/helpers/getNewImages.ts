@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { comfyOutputDirectory } from '../constants/imageGeneration';
+import { comfyOutputDir } from '../constants/imageGeneration';
 import { winstonLogger } from './logger';
 
 // Function to check if a file has a valid image extension
@@ -19,7 +19,7 @@ export function checkForNewFiles(initialImageFolder: string[], imageCount: numbe
   let newFiles: string[] = [];
 
   while (newFiles.length < imageCount) {
-    const currentFiles = scanDirectory(comfyOutputDirectory);
+    const currentFiles = scanDirectory(comfyOutputDir);
     newFiles = currentFiles.filter((file) => !initialImageFolder.includes(file));
 
     // wait 1 second

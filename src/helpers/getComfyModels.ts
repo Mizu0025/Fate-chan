@@ -1,9 +1,9 @@
 import fs from 'fs';
-import { comfyModelsFolder } from '../constants/imageGeneration';
+import { comfyCheckpointsDir } from '../constants/imageGeneration';
 
 // check comfyui models folder for contents, return contents
 export function getCurrentModels(): string[] {
-  const folderContents: string[] = fs.readdirSync(comfyModelsFolder);
+  const folderContents: string[] = fs.readdirSync(comfyCheckpointsDir);
   let currentModels: string[] = [];
 
   folderContents.forEach((file) => {

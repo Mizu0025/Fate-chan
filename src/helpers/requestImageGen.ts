@@ -1,12 +1,12 @@
 import { checkForNewFiles, scanDirectory } from './getNewImages';
 import { getMultipleUrlPaths } from './getUrlPath';
 import { imagePrompt } from './parsePrompt';
-import { generate_txt2img, queue_sd3_prompt } from '../generateImage';
-import { comfyOutputDirectory } from '../constants/imageGeneration';
+import { generate_txt2img } from '../generateImage';
+import { comfyOutputDir } from '../constants/imageGeneration';
 
 export async function requestImageGeneration(parsedPrompt: imagePrompt): Promise<String[]> {
   // check current image folder contents
-  const initialImageFolder = scanDirectory(comfyOutputDirectory);
+  const initialImageFolder = scanDirectory(comfyOutputDir);
 
   // request new image from ComfyUI API
   await generate_txt2img(parsedPrompt);
@@ -19,12 +19,4 @@ export async function requestImageGeneration(parsedPrompt: imagePrompt): Promise
 
   // return imagesList
   return newImagesUrlPath;
-}
-
-export async function requestSD3ImageGeneration(parsedPrompt: imagePrompt): Promise<string> {
-  // request new image from ComfyUI API
-  const sd3Image = await queue_sd3_prompt(parsedPrompt);
-
-  // return imagesList
-  return sd3Image;
 }

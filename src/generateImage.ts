@@ -1,4 +1,4 @@
-import { comfyOutputDirectory, comfyUrl } from './constants/imageGeneration';
+import { comfyUrl } from './constants/imageGeneration';
 import { imagePrompt } from './helpers/parsePrompt';
 import axios from 'axios';
 import fs from 'fs';
@@ -6,8 +6,6 @@ import { randomInt } from 'crypto';
 import { JSONStructure, RequestObject } from './constants/comfyuiRequest';
 import { ImageGenerationError } from './errors/imageGenerationError';
 import { winstonLogger } from './helpers/logger';
-import FormData from 'form-data';
-import { scanDirectory } from './helpers/getNewImages';
 
 async function queue_prompt(prompt_workflow: RequestObject) {
   const prompt: JSONStructure = { prompt: prompt_workflow };
@@ -27,43 +25,6 @@ async function queue_prompt(prompt_workflow: RequestObject) {
       winstonLogger.error(error);
       throw new ImageGenerationError('Failed to generate image!');
     });
-}
-
-export async function queue_sd3_prompt(parsedPrompt: imagePrompt): Promise<string> {
-  const formData = {
-    prompt: parsedPrompt.positive_prompt,
-    negative_prompt: parsedPrompt.negative_prompt,
-    seed: randomInt(0, 1000000),
-    style_preset: 'anime',
-    output_format: 'png',
-  };
-
-  const response = await axios.postForm(
-    `https://api.stability.ai/v2beta/stable-image/generate/sd3`,
-    axios.toFormData(formData, new FormData()),
-    {
-      validateStatus: undefined,
-      responseType: 'arraybuffer',
-      headers: {
-        Authorization: `Bearer token here`,
-        Accept: 'image/*',
-      },
-    },
-  );
-
-  const files = scanDirectory(comfyOutputDirectory);
-  const matchingFiles = files.filter((file) => file.startsWith('sd3')).length;
-  const imageName = `sd3-${matchingFiles + 1}`;
-  const filepath = `${comfyOutputDirectory}/${imageName}.${formData.output_format}`;
-
-  if (response.status === 200) {
-    winstonLogger.info(JSON.stringify(response.data));
-    fs.writeFileSync(filepath, Buffer.from(response.data));
-    return filepath;
-  } else {
-    winstonLogger.error(response.status);
-    throw new Error(`${response.status}: ${response.data.toString()}`);
-  }
 }
 
 export let currently_loaded_model: string;
