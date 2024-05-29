@@ -1,13 +1,10 @@
 import irc from 'irc';
-import { triggerWord } from '../constants/serverOptions';
 import { parseImagePrompt } from './parsePrompt';
 import { requestImageGeneration } from './requestImageGen';
 import { currently_loaded_model } from '../generateImage';
 import { getCurrentModels } from './getComfyModels';
 import { winstonLogger } from './logger';
-
-const helpTrigger = `${triggerWord} --help`;
-const currentModelsTrigger = `${triggerWord} --currentModels`;
+import { changeModelTrigger, currentModelsTrigger, heightTrigger, helpTrigger, imageCountTrigger, negativePromptTrigger, triggerWord, widthTrigger } from '../constants/triggerWords';
 
 function getCurrenModels(client: irc.Client, to: string): void {
   const currentModels = getCurrentModels();
@@ -16,15 +13,16 @@ function getCurrenModels(client: irc.Client, to: string): void {
 }
 
 function explainBotFeatures(client: irc.Client, to: string): void {
-  const introduction = "Hello! Here's a list of my current functions:";
-  const generateImages = ` - To generate images, use "${triggerWord} prompt". I accept modifiers too!`;
-  const generateModifiers = `--width, --height and --no control image dimensions and anything you don't want in the image. --count influences the number I'll make (default 1), and --model lets you swap out what checkpoint model I'm using; that influences artstyle.`;
-  const getModels = `If you want a list of current models, use ${currentModelsTrigger}`;
+  const helpInformation: string[] = [
+    "Hello! Here's a list of my current functions:",
+    `- To generate images, use "${triggerWord} prompt". I accept modifiers too!`,
+    `The ${widthTrigger}, "${heightTrigger}" and "${negativePromptTrigger}" control image dimensions and anything you don't want in the image. "${imageCountTrigger}" influences the number I'll make (default 1), and "${changeModelTrigger}" lets you swap out what checkpoint model I'm using; that influences artstyle.`,
+    `If you want a list of current models, use "${currentModelsTrigger}"`
+  ];
 
-  client.say(to, `${introduction}`);
-  client.say(to, `${generateImages}`);
-  client.say(to, `${generateModifiers}`);
-  client.say(to, `${getModels}`);
+  for (const key in helpInformation) {
+    client.say(to, helpInformation[key]);
+  }
 }
 
 async function generateImage(client: irc.Client, from: string, to: string, message: string): Promise<void> {
@@ -52,17 +50,16 @@ export async function handleTriggerMessage(
   to: string,
   message: string,
 ) {
-  switch (message) {
-    case helpTrigger:
-      explainBotFeatures(client, to);      
-      break;
-
-    case currentModelsTrigger:
+  if(message === helpTrigger)
+    {
+      explainBotFeatures(client, to);
+    }
+  else if(message === currentModelsTrigger)
+    {
       getCurrenModels(client, to);
-      break;
-  
-    default:
+    }
+  else if(message.startsWith(triggerWord))
+    {
       generateImage(client, from, to, message);
-      break;
-  }
+    }
 }

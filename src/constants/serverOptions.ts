@@ -21,8 +21,6 @@ export const serverOptions: serverConfig = {
   realName: 'Fate-Chan the IRC Bot',
 };
 
-export const triggerWord: string = '!fate';
-
 export const defaultPrompt = {
   positive_prompt: 'masterpiece, best quality',
   negative_prompt: 'lowres, worst quality, low quality',
@@ -30,5 +28,4 @@ export const defaultPrompt = {
   height: 1024,
   image_count: 1,
   checkpoint: 'deepBlueXL_v401.safetensors'
-//  checkpoint: getCurrentModels().filter(model => model.includes("xl"))[0],
 };

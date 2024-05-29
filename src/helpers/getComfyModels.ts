@@ -15,10 +15,4 @@ export function getCurrentModels(): string[] {
   return currentModels;
 }
 
-export function doesModelExist(model: string): boolean {
-  const currentModels = getCurrentModels();
-
-  const doesModelExist = currentModels.includes(model);
-
-  return doesModelExist;
-}
+export const doesModelExist = (model: string): boolean => getCurrentModels().includes(model);

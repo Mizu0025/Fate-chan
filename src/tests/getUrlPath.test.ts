@@ -1,5 +1,5 @@
 import { domainPath } from '../constants/imageGeneration';
-import { getUrlPath } from '../helpers/getUrlPath'; // Update with the correct path to your module
+import { getMultipleUrlPaths, getSingleUrlPath } from '../helpers/getUrlPath'; // Update with the correct path to your module
 
 jest.mock('winston', () => ({
   createLogger: jest.fn(() => ({
@@ -21,12 +21,23 @@ jest.mock('winston', () => ({
 }));
 
 describe('getUrlPath', () => {
-  test('Converts file paths to URLs', () => {
+  test('Converts a single file path to URL', () => {
+    // Setup
+    const imageFilepath = 'path/to/image1.png';
+
+    // Act
+    const result = getSingleUrlPath(imageFilepath);
+
+    // Assert
+    expect(result).toEqual(`${domainPath}/image1.png`);
+  });
+
+  test('Converts multiple file paths to URLs', () => {
     // Setup
     const imageFilepaths = ['path/to/image1.png', 'path/to/image2.png', 'path/to/image3.png'];
 
     // Act
-    const result = getUrlPath(imageFilepaths);
+    const result = getMultipleUrlPaths(imageFilepaths);
 
     // Assert
     expect(result).toEqual([
