@@ -1,8 +1,11 @@
 export const triggerWord: string = '!fate';
-export const currentModelsTrigger = `${triggerWord} --currentModels`;
-export const helpTrigger = `${triggerWord} --help`;
-export const widthTrigger = "--width";
-export const heightTrigger = "--height";
-export const imageCountTrigger = "--count";
-export const negativePromptTrigger = "--no";
-export const changeModelTrigger = "--model";
+export const optionTrigger: string = "--";
+export const currentModelsTrigger: string = `${triggerWord} ${optionTrigger}currentModels`;
+export const helpTrigger: string = `${triggerWord} ${optionTrigger}help`;
+
+// image adjust triggers
+export const widthTrigger: string = "width";
+export const heightTrigger: string = "height";
+export const imageCountTrigger: string = "count";
+export const negativePromptTrigger: string = "no";
+export const changeModelTrigger: string = "model";

@@ -4,7 +4,8 @@ import { requestImageGeneration } from './requestImageGen';
 import { currently_loaded_model } from '../generateImage';
 import { getCurrentModels } from './getComfyModels';
 import { winstonLogger } from './logger';
-import { changeModelTrigger, currentModelsTrigger, heightTrigger, helpTrigger, imageCountTrigger, negativePromptTrigger, triggerWord, widthTrigger } from '../constants/triggerWords';
+import { currentModelsTrigger, helpTrigger, optionTrigger, triggerWord } from '../constants/triggerWords';
+import { helpInformation } from '../constants/helpInformation';
 
 function getCurrenModels(client: irc.Client, to: string): void {
   const currentModels = getCurrentModels();
@@ -13,13 +14,6 @@ function getCurrenModels(client: irc.Client, to: string): void {
 }
 
 function explainBotFeatures(client: irc.Client, to: string): void {
-  const helpInformation: string[] = [
-    "Hello! Here's a list of my current functions:",
-    `- To generate images, use "${triggerWord} prompt". I accept modifiers too!`,
-    `The ${widthTrigger}, "${heightTrigger}" and "${negativePromptTrigger}" control image dimensions and anything you don't want in the image. "${imageCountTrigger}" influences the number I'll make (default 1), and "${changeModelTrigger}" lets you swap out what checkpoint model I'm using; that influences artstyle.`,
-    `If you want a list of current models, use "${currentModelsTrigger}"`
-  ];
-
   for (const key in helpInformation) {
     client.say(to, helpInformation[key]);
   }

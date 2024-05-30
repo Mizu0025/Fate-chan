@@ -129,7 +129,7 @@ describe('parseImagePrompt', () => {
   ];
 
   it.each(cases)('%s', (_desc, message, expected, modelExists) => {
-    // Act
+    // Setup
     jest.spyOn(require('../helpers/getComfyModels'), 'doesModelExist').mockImplementation(() => {
       return modelExists;
     });
