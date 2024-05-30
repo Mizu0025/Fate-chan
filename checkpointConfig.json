@@ -1,0 +1,54 @@
+{
+    "models": [
+      {
+        "name": "CetusMix_WhaleFall_v2",
+        "description": "SDXL model which produces stylistic, minimalistic anime art",
+        "positivePrompt": "",
+        "negativePrompt": "(worst quality:1.6), (low quality:1.6)",
+        "width": 1024,
+        "height": 1024,
+        "guidance": 7,
+        "steps": 20,
+        "ksampler": "DPM++ 2M Karras",
+        "clip_skip": 2
+      },
+      {
+        "name": "DeepBlue",
+        "description": "SDXL model merged with BluePencilXL for anime art",
+        "positivePrompt": "highres, best quality, absurdres, newest",
+        "negativePrompt": "worst quality, simple background",
+        "width": 1024,
+        "height": 1024,
+        "guidance": 7,
+        "steps": 60,
+        "ksampler": "DPM++ 2M SDE Karras",
+        "clip_skip": 2
+      },
+      {
+        "name": "Flat2D_Animerge",
+        "description": "SDXL model that produces anime art in a flat, less detailed style",
+        "positivePrompt": "(best quality:0.8), perfect anime still frame",
+        "negativePrompt": "(worst quality:0.8), verybadimagenegative_v1.3,(surreal:0.8), (modernism:0.8), (art deco:0.8), (art nouveau:0.8)",
+        "width": 1024,
+        "height": 1024,
+        "guidance": 5.5,
+        "steps": 20,
+        "ksampler": "DPM++ 2M Karras",
+        "clip_skip": 2
+      },
+      {
+        "name": "MeinaMix_v11",
+        "description": "SDXL model that produces finely detailed anime art",
+        "positivePrompt": "",
+        "negativePrompt": "(worst quality, low quality:1.4)",
+        "width": 1024,
+        "height": 1024,
+        "cfg_scale": 4,
+        "guidance": 5.5,
+        "steps": 20,
+        "ksampler": "DPM++ 2M Karras",
+        "clip_skip": 2
+      }
+    ]
+  }
+  

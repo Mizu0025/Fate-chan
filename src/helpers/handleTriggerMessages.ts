@@ -2,15 +2,17 @@ import irc from 'irc';
 import { parseImagePrompt } from './parsePrompt';
 import { requestImageGeneration } from './requestImageGen';
 import { currently_loaded_model } from '../generateImage';
-import { getCurrentModels } from './getComfyModels';
+import { getCurrentModels, modelInfo } from './getComfyModels';
 import { winstonLogger } from './logger';
 import { currentModelsTrigger, helpTrigger, optionTrigger, triggerWord } from '../constants/triggerWords';
 import { helpInformation } from '../constants/helpInformation';
 
 function getCurrenModels(client: irc.Client, to: string): void {
-  const currentModels = getCurrentModels();
+  const currentModels: modelInfo[] = getCurrentModels();
 
-  client.say(to, `${currentModels}`);
+  currentModels.forEach(model => {
+    client.say(to, `${model.name} - ${model.description}`)
+  });
 }
 
 function explainBotFeatures(client: irc.Client, to: string): void {
