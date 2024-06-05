@@ -13,7 +13,7 @@
         "clip_skip": 2
       },
       {
-        "name": "DeepBlue",
+        "name": "DeepBlue_v401",
         "description": "SDXL model merged with BluePencilXL for anime art",
         "positivePrompt": "highres, best quality, absurdres, newest",
         "negativePrompt": "worst quality, simple background",

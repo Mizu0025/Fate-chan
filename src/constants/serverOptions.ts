@@ -1,4 +1,4 @@
-import { getCurrentModels } from "../helpers/getComfyModels";
+import { getCurrentCheckpoints } from '../helpers/getCurrentCheckpoints';
 
 interface serverConfig {
   channels: string[];
@@ -27,5 +27,5 @@ export const defaultPrompt = {
   width: 1024,
   height: 1024,
   image_count: 1,
-  checkpoint: 'deepBlueXL_v401.safetensors'
+  checkpoint: 'deepBlueXL_v401.safetensors',
 };

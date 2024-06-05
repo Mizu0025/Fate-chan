@@ -2,16 +2,21 @@ import irc from 'irc';
 import { parseImagePrompt } from './parsePrompt';
 import { requestImageGeneration } from './requestImageGen';
 import { currently_loaded_model } from '../generateImage';
-import { getCurrentModels, modelInfo } from './getComfyModels';
+import { getCurrentCheckpoints, modelInfo } from './getCurrentCheckpoints';
 import { winstonLogger } from './logger';
-import { currentModelsTrigger, helpTrigger, optionTrigger, triggerWord } from '../constants/triggerWords';
+import {
+  currentModelsTrigger,
+  helpTrigger,
+  optionTrigger,
+  triggerWord,
+} from '../constants/triggerWords';
 import { helpInformation } from '../constants/helpInformation';
 
 function getCurrenModels(client: irc.Client, to: string): void {
-  const currentModels: modelInfo[] = getCurrentModels();
+  const currentModels: modelInfo[] = getCurrentCheckpoints();
 
-  currentModels.forEach(model => {
-    client.say(to, `${model.name} - ${model.description}`)
+  currentModels.forEach((model) => {
+    client.say(to, `${model.name} - ${model.description}`);
   });
 }
 
@@ -21,7 +26,12 @@ function explainBotFeatures(client: irc.Client, to: string): void {
   }
 }
 
-async function generateImage(client: irc.Client, from: string, to: string, message: string): Promise<void> {
+async function generateImage(
+  client: irc.Client,
+  from: string,
+  to: string,
+  message: string,
+): Promise<void> {
   try {
     const parsedPrompt = parseImagePrompt(message);
     if (parsedPrompt.checkpoint != currently_loaded_model) {
@@ -46,16 +56,11 @@ export async function handleTriggerMessage(
   to: string,
   message: string,
 ) {
-  if(message === helpTrigger)
-    {
-      explainBotFeatures(client, to);
-    }
-  else if(message === currentModelsTrigger)
-    {
-      getCurrenModels(client, to);
-    }
-  else if(message.startsWith(triggerWord))
-    {
-      generateImage(client, from, to, message);
-    }
+  if (message === helpTrigger) {
+    explainBotFeatures(client, to);
+  } else if (message === currentModelsTrigger) {
+    getCurrenModels(client, to);
+  } else if (message.startsWith(triggerWord)) {
+    generateImage(client, from, to, message);
+  }
 }

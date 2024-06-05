@@ -8,9 +8,9 @@ import { ImageGenerationError } from './errors/imageGenerationError';
 import { winstonLogger } from './helpers/logger';
 
 export let currently_loaded_model: string;
-const workflowTxt2JsonPath = "workflows/txt2img.json";
-const workflowEncodeType = "utf-8";
-const imagePrefix = "Fatebot";
+const workflowTxt2JsonPath = 'workflows/txt2img.json';
+const workflowEncodeType = 'utf-8';
+const imagePrefix = 'Fatebot';
 
 async function queue_prompt(prompt_workflow: RequestObject) {
   const prompt: JSONStructure = { prompt: prompt_workflow };
