@@ -22,7 +22,7 @@ jest.mock('winston', () => ({
 
 describe('getUrlPath', () => {
   test('Converts a single file path to URL', () => {
-    // Setup
+    // Arrange
     const imageFilepath = 'path/to/image1.png';
 
     // Act
@@ -33,7 +33,7 @@ describe('getUrlPath', () => {
   });
 
   test('Converts multiple file paths to URLs', () => {
-    // Setup
+    // Arrange
     const imageFilepaths = ['path/to/image1.png', 'path/to/image2.png', 'path/to/image3.png'];
 
     // Act

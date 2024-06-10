@@ -13,5 +13,5 @@ export interface checkpointConfig {
 }
 
 export interface checkpointConfigList {
-  models: Partial<checkpointConfig>[];
+  models: checkpointConfig[];
 }

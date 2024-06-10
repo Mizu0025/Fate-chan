@@ -8,18 +8,18 @@ import { checkpointConfig, checkpointConfigList } from '../constants/checkpointC
 
 // check comfyui models folder for contents, return contents
 
-export function getCurrentCheckpoints(): Partial<checkpointConfig>[] {
+export function getCurrentCheckpoints(): checkpointConfig[] {
   const checkpointConfigPath = 'checkpointConfig.json'; // Adjust the path as needed
   const checkpointConfig: checkpointConfigList = JSON.parse(
     fs.readFileSync(checkpointConfigPath, 'utf8'),
   );
-  let currentCheckpointInformation: Partial<checkpointConfig>[] = [];
+  let currentCheckpointInformation: checkpointConfig[] = [];
 
   if (!checkpointConfig.models || !Array.isArray(checkpointConfig.models)) {
     throw new Error('Invalid checkpoint configuration format');
   }
 
-  checkpointConfig.models.forEach((model: Partial<checkpointConfig>) => {
+  checkpointConfig.models.forEach((model: checkpointConfig) => {
     currentCheckpointInformation.push({
       name: model.name,
       description: model.description,
@@ -37,7 +37,3 @@ export function getCurrentCheckpoints(): Partial<checkpointConfig>[] {
 
   return currentCheckpointInformation;
 }
-
-export const doesCheckpointExist = (requestedModelName: string): boolean => {
-  return getCurrentCheckpoints().some((model) => model.name === requestedModelName);
-};

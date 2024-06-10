@@ -32,7 +32,7 @@ describe('generate_txt2img', () => {
   });
 
   it('should generate image successfully', async () => {
-    // Setup
+    // Arrange
     const mockParsedPrompt = {
       checkpoint: 'checkpoint_name',
       width: 256,

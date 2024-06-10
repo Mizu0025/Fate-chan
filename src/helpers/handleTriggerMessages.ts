@@ -2,18 +2,14 @@ import irc from 'irc';
 import { parseImagePrompt } from './parsePrompt';
 import { requestImageGeneration } from './requestImageGen';
 import { currently_loaded_model } from '../generateImage';
-import { getCurrentCheckpoints, modelInfo } from './getCurrentCheckpoints';
+import { getCurrentCheckpoints } from './getCurrentCheckpoints';
 import { winstonLogger } from './logger';
-import {
-  currentModelsTrigger,
-  helpTrigger,
-  optionTrigger,
-  triggerWord,
-} from '../constants/triggerWords';
+import { currentCheckpointsTrigger, helpTrigger, triggerWord } from '../constants/triggerWords';
 import { helpInformation } from '../constants/helpInformation';
+import { checkpointConfig } from '../constants/checkpointConfig';
 
 function getCurrenModels(client: irc.Client, to: string): void {
-  const currentModels: modelInfo[] = getCurrentCheckpoints();
+  const currentModels: checkpointConfig[] = getCurrentCheckpoints();
 
   currentModels.forEach((model) => {
     client.say(to, `${model.name} - ${model.description}`);
@@ -58,7 +54,7 @@ export async function handleTriggerMessage(
 ) {
   if (message === helpTrigger) {
     explainBotFeatures(client, to);
-  } else if (message === currentModelsTrigger) {
+  } else if (message === currentCheckpointsTrigger) {
     getCurrenModels(client, to);
   } else if (message.startsWith(triggerWord)) {
     generateImage(client, from, to, message);
